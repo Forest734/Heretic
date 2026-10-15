@@ -36,6 +36,8 @@ itself are in NEWS.md.
   instead of a lone gem. They're built from Blasphemer's own art by `blasphemer/screens/`.
 - Blue gem arrows at the ends of the inventory bar, blinking when there are more artifacts
   that way, where Blasphemer showed an asterisk; the Crispness menu points with the same gem.
+- Using an artifact flashes a burst of fire in the artifact box, where Blasphemer flashed a
+  stray red mark.
 - Maps between levels: after each level of episodes 1 to 3, the episode's map is shown, as in
   Heretic, with a red cross on every level done and a gold arrow on the next. Blasphemer had
   only a blank screen there. They're drawn as ink on parchment, one land for each episode

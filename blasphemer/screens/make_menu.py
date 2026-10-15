@@ -1,4 +1,4 @@
-"""Make the menu graphics Blasphemer left as placeholders.
+"""Make the menu and status bar graphics Blasphemer left as placeholders.
 
 usage: python3 make_menu.py <blasphem.wad> <graphics dir>
 
@@ -12,6 +12,9 @@ From the WAD's own art, in its palette, writes for wadinfo.txt and BlasphDM.txt:
   invgeml1.png ... invgemr2.png INVGEML1 .. blue gems pointing left and right,
                                 INVGEMR2    lit and dim, for the inventory bar
                                             and the Crispness menu's cursor
+  useartia.png ... useartie.png USEARTIA-E  the flash in the artifact box when
+                                            an artifact is used
+  lame.png                     LAME        a deathmatch frag count below -9
 Offsets go in wadinfo.txt; the comments below say what they are.
 """
 import math, os, random, sys
@@ -222,3 +225,57 @@ def gem(right, lit):
 for side, right in (("l", False), ("r", True)):
     save(gem(right, True), f"invgem{side}1.png")
     save(gem(right, False), f"invgem{side}2.png")
+
+
+# ---- USEARTIA-E: using an artifact sets ArtifactFlash to 4, and the status
+# bar shows USEARTI(A + flash - 1) for a tic each, so D, C, B, then A (E is
+# never shown), over BLACKSQ in the artifact box at (182, 161), or over the
+# view in the full-screen HUD.  A burst of fire from the box's middle, at
+# its brightest first, then fading as it spreads.  30 x 30 with offsets 4 1
+# fills BLACKSQ's square.
+FIRE = [(0.90, 35), (0.75, 144), (0.62, 241), (0.50, 242), (0.40, 243), (0.31, 245), (0.23, 246)]
+
+
+def burst(strength):
+    n, ss = 30, 4
+    radius = 5 + 9 * (1 - strength)
+    rows = []
+    for y in range(n):
+        row = []
+        for x in range(n):
+            total = 0.0
+            for sy in range(ss):
+                for sx in range(ss):
+                    dx = x + (sx + 0.5) / ss - n / 2
+                    dy = y + (sy + 0.5) / ss - n / 2
+                    r = math.hypot(dx, dy)
+                    a = math.atan2(dy, dx)
+                    rays = max(0.0, math.cos(4 * a)) ** 6 + 0.6 * max(0.0, math.cos(4 * a + math.pi)) ** 10
+                    ring = math.exp(-((r - radius) / 2.2) ** 2)
+                    core = math.exp(-(r / (radius * 0.55)) ** 2)
+                    total += strength * (core + 0.55 * ring + 0.7 * rays * math.exp(-r / (radius * 0.9)))
+            v = total / (ss * ss)
+            row.append(next((c for t, c in FIRE if v >= t), None))
+        rows.append(row)
+    return rows
+
+
+for i, letter in enumerate("abcde"):
+    save(burst(0.35 + 0.65 * i / 4), f"usearti{letter}.png")
+
+
+# ---- LAME: DrINumber shows it, at (x + 1, y + 1), for a number below -9,
+# where the three digits would go; only a deathmatch frag count gets there,
+# as health is shown no lower than 0.  In the status bar digits' blocky reds.
+LETTERS = {
+    "L": ["oo....", "oo....", "oo....", "oo....", "oo....", "oo....", "oooooo", "oooooo"],
+    "A": [".oooo.", "oooooo", "oo..oo", "oo..oo", "oooooo", "oooooo", "oo..oo", "oo..oo"],
+    "M": ["oo...oo", "ooo.ooo", "ooooooo", "oo.o.oo", "oo...oo", "oo...oo", "oo...oo", "oo...oo"],
+    "E": ["oooooo", "oooooo", "oo....", "ooooo.", "ooooo.", "oo....", "oooooo", "oooooo"],
+}
+SHADE = [156, 156, 154, 154, 153, 153, 148, 145]   # lit from above, as IN0-9
+lame = [[] for _ in range(8)]
+for k, ch in enumerate("LAME"):
+    for y in range(8):
+        lame[y] += [SHADE[y] if c == "o" else None for c in LETTERS[ch][y]] + ([None] if k < 3 else [])
+save(lame, "lame.png")

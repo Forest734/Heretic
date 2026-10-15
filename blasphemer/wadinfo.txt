@@ -275,11 +275,11 @@ RTFACE   -17 0 # * PLACE HOLDER *
 LTFCTOP  0 1 # Stilgar
 RTFCTOP  0 0 # * PLACE HOLDER *   
 SELECTBO 0 29 # Stilgar   
-USEARTIA 0 0 # * PLACE HOLDER *   
-USEARTIB 0 0 # * PLACE HOLDER *   
-USEARTIC 0 0 # * PLACE HOLDER *   
-USEARTID 0 0 # * PLACE HOLDER *   
-USEARTIE 0 0 # * PLACE HOLDER *   
+USEARTIA 4 1	# heretic: made by screens/make_menu.py
+USEARTIB 4 1	# heretic: made by screens/make_menu.py
+USEARTIC 4 1	# heretic: made by screens/make_menu.py
+USEARTID 4 1	# heretic: made by screens/make_menu.py
+USEARTIE 4 1	# heretic: made by screens/make_menu.py
 INVGEML1 0 0	# heretic: made by screens/make_menu.py
 INVGEMR1 0 0	# heretic: made by screens/make_menu.py
 INVGEML2 0 0	# heretic: made by screens/make_menu.py
@@ -298,7 +298,7 @@ IN7      0 0 # Stilgar
 IN8      0 0 # Stilgar 
 IN9      0 0 # Stilgar
 NEGNUM   0 0 # Stilgar
-LAME     0 0 # * PLACE HOLDER *  
+LAME     0 0	# heretic: made by screens/make_menu.py
 SMALLIN0 1 0 # Stilgar
 SMALLIN1 1 0 # Stilgar  
 SMALLIN2 1 0 # Stilgar  

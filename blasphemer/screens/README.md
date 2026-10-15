@@ -31,8 +31,8 @@ writes the views to `shots/`, which are kept, so changing the text only needs
 
 ## Menu graphics
 
-`make_menu.py` makes the menu graphics Blasphemer had left as placeholders,
-into `graphics/`:
+`make_menu.py` makes the menu's and status bar's graphics Blasphemer had
+left as placeholders, into `graphics/`:
 
 | Lump              | Shows                                                    |
 | ----------------- | -------------------------------------------------------- |
@@ -41,6 +41,8 @@ into `graphics/`:
 | M_SLDLT, M_SLDRT  | the slider's ends, silver with a red jewel               |
 | M_SLDMD1, M_SLDMD2| the slider's rail, in turn; the first has a tick below   |
 | INVGEML1-2, INVGEMR1-2 | blue gems pointing left and right, lit and dim: the inventory bar's arrows and the Crispness menu's cursor |
+| USEARTIA-E        | a burst of fire in the artifact box when one is used     |
+| LAME              | "LAME" in the status bar's reds, for frags below -9      |
 
 ```sh
 python3 blasphemer/screens/make_menu.py blasphemer/blasphem.wad blasphemer/graphics
