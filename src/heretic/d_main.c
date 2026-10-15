@@ -517,6 +517,20 @@ void D_AdvanceDemo(void)
     advancedemo = true;
 }
 
+// [heretic] play a demo, or go on to the next page if the WAD hasn't got it
+// (Blasphemer's DEMO3 didn't play in step with its E3M3, so it's left out)
+static void PlayDemoIfPresent(const char *name)
+{
+    if (W_CheckNumForName(name) < 0)
+    {
+        D_AdvanceDemo();
+        return;
+    }
+    BorderNeedRefresh = true;
+    UpdateState |= I_FULLSCRN;
+    G_DeferedPlayDemo(name);
+}
+
 void D_DoAdvanceDemo(void)
 {
     players[consoleplayer].playerstate = PST_LIVE;      // don't reborn
@@ -540,9 +554,7 @@ void D_DoAdvanceDemo(void)
             pagename = DEH_String("TITLE");
             break;
         case 2:
-            BorderNeedRefresh = true;
-            UpdateState |= I_FULLSCRN;
-            G_DeferedPlayDemo(DEH_String("demo1"));
+            PlayDemoIfPresent(DEH_String("demo1"));
             break;
         case 3:
             pagetic = 200;
@@ -550,9 +562,7 @@ void D_DoAdvanceDemo(void)
             pagename = DEH_String("CREDIT");
             break;
         case 4:
-            BorderNeedRefresh = true;
-            UpdateState |= I_FULLSCRN;
-            G_DeferedPlayDemo(DEH_String("demo2"));
+            PlayDemoIfPresent(DEH_String("demo2"));
             break;
         case 5:
             pagetic = 200;
@@ -567,9 +577,7 @@ void D_DoAdvanceDemo(void)
             }
             break;
         case 6:
-            BorderNeedRefresh = true;
-            UpdateState |= I_FULLSCRN;
-            G_DeferedPlayDemo(DEH_String("demo3"));
+            PlayDemoIfPresent(DEH_String("demo3"));
             break;
     }
 }

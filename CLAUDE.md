@@ -12,7 +12,8 @@ heretic is a free Heretic, improved in graphics and gameplay. It has two parts:
   levels, graphics, sound and music made to replace Heretic's, so nothing needs buying. It's
   BSD-3-Clause (`blasphemer/COPYING.md`); `blasphemer/CREDITS.md` names its authors. Episodes
   1-3 are mostly complete, and art is still missing or rough in places: `wadinfo.txt` still
-  marks LOADING (unused by the engine) and the three demos as placeholders.
+  marks LOADING (unused by the engine) and DEMO1-2 as placeholders, though both demos play in
+  step. DEMO3 didn't, so it's left out, and the title loop skips a demo the WAD hasn't got.
 
 What the fork changes so far is in CHANGELOG.md. Every change to upstream code is marked
 `// [heretic]`, as Crispy marks its own `// [crispy]`, so `git grep '\[heretic\]'` finds them.

@@ -41,6 +41,8 @@ itself are in NEWS.md.
 
 ### Fixed
 
+- The title loop no longer plays Blasphemer's third demo, which had fallen out of step with
+  its level: the player walked into walls and died. The other two play as they should.
 - The end of episode 2 was drawn in the wrong colours: its palette (E2PAL) was a placeholder
   too. It's now the game's own.
 

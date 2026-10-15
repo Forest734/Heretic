@@ -21,7 +21,6 @@ FINAL2   E3STARS	# heretic: made by screens/make_screens.py
 ENDTEXT  # Stilgar
 DEMO1    # * PLACE HOLDER *
 DEMO2    # * PLACE HOLDER *
-DEMO3    # * PLACE HOLDER *
 GENMIDI  # * PLACE HOLDER *
 SNDCURVE # ~ AutoGenerate (Stilgar) ~
 DMXGUS   # * PLACE HOLDER *
