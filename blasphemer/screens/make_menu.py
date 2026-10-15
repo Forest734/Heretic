@@ -7,8 +7,11 @@ From the WAD's own art, in its palette, writes for wadinfo.txt and BlasphDM.txt:
                                             the main menu's title (PSKULL)
   m_fslot.png                  M_FSLOT     a save slot, cut into the status
                                             bar's stone (BARBACK)
-  m_sldlt.png, m_sldmd1.png,   M_SLDLT ... the slider's ends and groove, in
-  m_sldmd2.png, m_sldrt.png    M_SLDRT     the same stone
+  m_sldlt.png, m_sldmd1.png,   M_SLDLT ... the slider's ends and rail, in the
+  m_sldmd2.png, m_sldrt.png    M_SLDRT     menu font's silver
+  invgeml1.png ... invgemr2.png INVGEML1 .. blue gems pointing left and right,
+                                INVGEMR2    lit and dim, for the inventory bar
+                                            and the Crispness menu's cursor
 Offsets go in wadinfo.txt; the comments below say what they are.
 """
 import math, os, random, sys
@@ -185,3 +188,37 @@ save(end(False), "m_sldlt.png")
 save(rail(0, True), "m_sldmd1.png")
 save(rail(1, False), "m_sldmd2.png")
 save(end(True), "m_sldrt.png")
+
+
+# ---- INVGEML1/2 and INVGEMR1/2: the inventory bar blinks them at the top of
+# its ends, between the lit (1) and the dim (2), when there are more
+# artifacts that way, and the Crispness menu blinks INVGEMR1/2 beside an
+# item as its cursor, 14 pixels left of the text and a pixel above it.  So:
+# 7 x 9, no offsets, in the slider knob's blues.
+def gem(right, lit):
+    h, w = 9, 7
+    rows = [[None] * w for _ in range(h)]
+    for y in range(h):
+        reach = round(6 - abs(y - 4) * 1.5)   # the point is on the middle row
+        for x in range(reach + 1):
+            rows[y][x] = 0
+    shift = 0 if lit else -5
+    for y in range(h):
+        for x in range(w):
+            if rows[y][x] is None:
+                continue
+            edge = any(not (0 <= y + dy < h and 0 <= x + dx < w) or rows[y + dy][x + dx] is None
+                       for dx, dy in ((1, 0), (-1, 0), (0, 1), (0, -1)))
+            if edge:
+                rows[y][x] = 185                                 # the darkest blue
+            else:
+                rows[y][x] = (199 if y < 4 else 194 if y == 4 else 190) + shift
+    rows[2][1] = 205 + shift                                     # a glint
+    if not right:
+        rows = [list(reversed(r)) for r in rows]
+    return rows
+
+
+for side, right in (("l", False), ("r", True)):
+    save(gem(right, True), f"invgem{side}1.png")
+    save(gem(right, False), f"invgem{side}2.png")

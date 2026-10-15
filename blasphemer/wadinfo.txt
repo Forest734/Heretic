@@ -280,10 +280,10 @@ USEARTIB 0 0 # * PLACE HOLDER *
 USEARTIC 0 0 # * PLACE HOLDER *   
 USEARTID 0 0 # * PLACE HOLDER *   
 USEARTIE 0 0 # * PLACE HOLDER *   
-INVGEML1 FONTA10 0 0 # * PLACE HOLDER *  
-INVGEMR1 FONTA10 0 0 # * PLACE HOLDER *  
-INVGEML2 FONTA03 0 0 # * PLACE HOLDER *  
-INVGEMR2 FONTA03 0 0 # * PLACE HOLDER *  
+INVGEML1 0 0	# heretic: made by screens/make_menu.py
+INVGEMR1 0 0	# heretic: made by screens/make_menu.py
+INVGEML2 0 0	# heretic: made by screens/make_menu.py
+INVGEMR2 0 0	# heretic: made by screens/make_menu.py
 BKEYICON 0 0 # Stilgar
 GKEYICON 0 0 # Stilgar 
 YKEYICON 0 0 # Stilgar

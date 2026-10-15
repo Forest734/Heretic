@@ -40,6 +40,7 @@ into `graphics/`:
 | M_FSLOT           | a save slot: the status bar's stone in a silver frame    |
 | M_SLDLT, M_SLDRT  | the slider's ends, silver with a red jewel               |
 | M_SLDMD1, M_SLDMD2| the slider's rail, in turn; the first has a tick below   |
+| INVGEML1-2, INVGEMR1-2 | blue gems pointing left and right, lit and dim: the inventory bar's arrows and the Crispness menu's cursor |
 
 ```sh
 python3 blasphemer/screens/make_menu.py blasphemer/blasphem.wad blasphemer/graphics
