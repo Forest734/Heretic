@@ -1351,9 +1351,19 @@ void D_DoomMain(void)
         gamedescription = "Heretic (registered)";
     }
 
-    I_SetWindowTitle(gamedescription);
+    // [heretic] Blasphemer tags itself with an empty BLASPHEM lump. Its
+    // levels aren't Heretic's, so its saves get their own directory.
+    if (W_CheckNumForName("BLASPHEM") != -1)
+    {
+        gamedescription = "Blasphemer";
+        savegamedir = M_GetSaveGameDir("blasphem.wad");
+    }
+    else
+    {
+        savegamedir = M_GetSaveGameDir("heretic.wad");
+    }
 
-    savegamedir = M_GetSaveGameDir("heretic.wad");
+    I_SetWindowTitle(gamedescription);
 
     I_PrintStartupBanner(gamedescription);
 

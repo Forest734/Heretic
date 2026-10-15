@@ -47,6 +47,7 @@ static const iwad_t iwads[] =
     { "rekkrsa.wad",  doom,      retail,     "REKKR" }, // [crispy] REKKR
     { "rekkrsl.wad",  doom,      retail,     "REKKR: Sunken Land" }, // [crispy] REKKR: Sunken Land (Steam retail)
     { "heretic.wad",  heretic,   retail,     "Heretic" },
+    { "blasphem.wad", heretic,   retail,     "Blasphemer" }, // [heretic] free Heretic IWAD
     { "heretic1.wad", heretic,   shareware,  "Heretic Shareware" },
     { "hexen.wad",    hexen,     commercial, "Hexen" },
     //{ "strife0.wad",  strife,    commercial, "Strife" }, // haleyjd: STRIFE-FIXME
