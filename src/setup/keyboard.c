@@ -465,7 +465,7 @@ void ConfigKeyboard(TXT_UNCAST_ARG(widget), void *user_data)
         AddKeyControl(window, "Jump", &key_jump);
     }
     else
-    if (gamemission == doom) // Crispy
+    if (gamemission == doom || gamemission == heretic) // Crispy, [heretic]
     {
         AddKeyControl(window, "Jump [*]", &key_jump);
     }

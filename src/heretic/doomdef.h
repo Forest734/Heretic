@@ -86,6 +86,10 @@
 #define	BTS_SAVEGAME	2       // save the game at each console
 // savegame slot numbers occupy the second byte of buttons
 
+// [heretic] jumping rides in the top bit of ticcmd_t.arti, as in Hexen and
+// Crispy Doom. Artifact numbers stay below it; 0xff means "next artifact".
+#define AFLAG_JUMP		0x80
+
 typedef enum
 {
     GS_LEVEL,
@@ -493,6 +497,9 @@ typedef struct player_s
 
     // [crispy] variable player view bob
     fixed_t bob2;
+
+    // [heretic] tics until the player can jump again (not saved)
+    int jumpTics;
 } player_t;
 
 #define CF_NOCLIP		1

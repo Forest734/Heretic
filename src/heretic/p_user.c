@@ -624,6 +624,11 @@ void P_PlayerThink(player_t * player)
     {
         P_ChickenPlayerThink(player);
     }
+    // [heretic] delay the next jump
+    if (player->jumpTics)
+    {
+        player->jumpTics--;
+    }
     // Handle movement
     if (player->mo->reactiontime)
     {                           // Player is frozen
@@ -637,6 +642,22 @@ void P_PlayerThink(player_t * player)
     if (player->mo->subsector->sector->special)
     {
         P_PlayerInSpecialSector(player);
+    }
+    // [heretic] jumping: only from the ground, not while flying, and only
+    // with room overhead. Crispy Doom's heights; a chicken hops lower.
+    if (cmd->arti != 0xff && cmd->arti & AFLAG_JUMP)
+    {
+        cmd->arti &= ~AFLAG_JUMP;
+
+        if (onground && !(player->mo->flags2 & MF2_FLY)
+            && player->viewz < player->mo->ceilingz - 16 * FRACUNIT
+            && !player->jumpTics)
+        {
+            player->mo->momz = player->chickenTics ? 6 * FRACUNIT
+                                                   : (7 + critical->jump) * FRACUNIT;
+            player->mo->flags2 &= ~MF2_ONMOBJ;
+            player->jumpTics = 18;
+        }
     }
     if (cmd->arti)
     {                           // Use an artifact

@@ -584,12 +584,22 @@ void P_ZMovement(mobj_t * mo)
         mo->z = mo->floorz;
         if (mo->momz < 0)
         {
+            // [heretic] delay the next jump
+            if (mo->player)
+            {
+                mo->player->jumpTics = 7;
+            }
             if (mo->player && mo->momz < -GRAVITY * 8 && !(mo->flags2 & MF2_FLY))       // squat down
             {
                 mo->player->deltaviewheight = mo->momz >> 3;
                 S_StartSound(mo, sfx_plroof);
                 // haleyjd: removed externdriver crap
-                mo->player->centering = true;
+                // [heretic] leave the view alone with permanent mouselook,
+                // as Crispy Doom does
+                if (!critical->mouselook)
+                {
+                    mo->player->centering = true;
+                }
             }
             mo->momz = 0;
         }

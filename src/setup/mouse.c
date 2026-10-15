@@ -188,6 +188,11 @@ static void ConfigExtraButtons(TXT_UNCAST_ARG(widget), TXT_UNCAST_ARG(unused))
         AddMouseControl(buttons_table, "Jump [*]", &mousebjump);
     }
 
+    if (gamemission == heretic) // [heretic]
+    {
+        AddMouseControl(buttons_table, "Jump [*]", &mousebjump);
+    }
+
     TXT_AddWidgets(window,
                    TXT_NewSeparator("Automap"),
                    am_buttons_table = TXT_NewTable(4),

@@ -146,6 +146,7 @@ static boolean CrispyMouselook(int option);
 static boolean CrispyBobfactor(int option);
 static boolean CrispyCenterWeapon(int option);
 static boolean CrispyDefaultskill(int option);
+static boolean CrispyJump(int option);
 static boolean CrispyCrosshair(int option);
 static boolean CrispyCrosshairShape(int option);
 static boolean CrispyCrosshairColor(int option);
@@ -424,12 +425,12 @@ static MenuItem_t Crispness3Items[] = {
     {ITT_LRFUNC2, "PLAYER VIEW/WEAPON BOBBING:", CrispyBobfactor, 0, MENU_NONE},
     {ITT_LRFUNC2, "WEAPON ATTACK ALIGNMENT:", CrispyCenterWeapon, 0, MENU_NONE},
     {ITT_LRFUNC2, "DEFAULT DIFFICULTY:", CrispyDefaultskill, 0, MENU_NONE},
+    {ITT_LRFUNC2, "JUMPING:", CrispyJump, 0, MENU_NONE}, // [heretic]
     {ITT_EMPTY, NULL, NULL, 0, MENU_NONE},
     {ITT_EMPTY, NULL, NULL, 0, MENU_NONE},
     {ITT_LRFUNC2, "DRAW CROSSHAIR:", CrispyCrosshair, 0, MENU_NONE},
     {ITT_LRFUNC2, "CROSSHAIR SHAPE:", CrispyCrosshairShape, 0, MENU_NONE},
     {ITT_LRFUNC2, "CROSSHAIR COLOR:", CrispyCrosshairColor, 0, MENU_NONE},
-    {ITT_EMPTY, NULL, NULL, 0, MENU_NONE},
     {ITT_EMPTY, NULL, NULL, 0, MENU_NONE},
     {ITT_EFUNC, "FIRST PAGE", CrispyNextPage, 0, MENU_NONE},
     {ITT_EFUNC, "PREV PAGE", CrispyPrevPage, 0, MENU_NONE},
@@ -505,6 +506,14 @@ static const multiitem_t multiitem_freelook_hh[NUM_FREELOOKS_HH] =
 {
     {FREELOOK_HH_LOCK, "LOCK"},
     {FREELOOK_HH_SPRING, "SPRING"},
+};
+
+// [heretic]
+static const multiitem_t multiitem_jump[NUM_JUMPS] =
+{
+    {JUMP_OFF, "OFF"},
+    {JUMP_LOW, "LOW"},
+    {JUMP_HIGH, "HIGH"},
 };
 
 static const multiitem_t multiitem_difficulties[NUM_SKILLS] =
@@ -1884,6 +1893,13 @@ static boolean CrispyDefaultskill(int option)
     return true;
 }
 
+// [heretic]
+static boolean CrispyJump(int option)
+{
+    ChangeSettingEnum(&crispy->jump, option, NUM_JUMPS);
+    return true;
+}
+
 static boolean CrispyCrosshair(int option)
 {
     ChangeSettingEnum(&crispy->crosshair, option, NUM_HE_CROSSHAIRS);
@@ -3184,14 +3200,18 @@ static void DrawCrispness3(void)
     // Default difficulty
     DrawCrispnessMultiItem(crispy->defaultskill, 200, 75, multiitem_difficulties, false);
 
-    DrawCrispnessSubheader("CROSSHAIR", 95);
+    // [heretic] Jumping
+    DrawCrispnessMultiItem(crispy->jump, 130, 85, multiitem_jump, false);
+
+    // [heretic] one row lower, below Jumping
+    DrawCrispnessSubheader("CROSSHAIR", 105);
 
     // Crosshair
-    DrawCrispnessMultiItem(crispy->crosshair, 180, 105, multiitem_he_crosshair, false);
+    DrawCrispnessMultiItem(crispy->crosshair, 180, 115, multiitem_he_crosshair, false);
 
     // Crosshair Type
-    DrawCrispnessMultiItem(crispy->crosshairtype+1, 188, 115, multiitem_he_crosshairtype, !crispy->crosshair);
+    DrawCrispnessMultiItem(crispy->crosshairtype+1, 188, 125, multiitem_he_crosshairtype, !crispy->crosshair);
 
     // Crosshair Color
-    DrawCrispnessMultiItem(crispy->crosshaircolor+1, 185, 125, multiitem_he_crosshaircolor, !crispy->crosshair);
+    DrawCrispnessMultiItem(crispy->crosshaircolor+1, 185, 135, multiitem_he_crosshaircolor, !crispy->crosshair);
 }

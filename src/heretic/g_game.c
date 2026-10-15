@@ -773,6 +773,14 @@ void G_BuildTiccmd(ticcmd_t *cmd, int maketic)
         cmd->arti = arti_egg;
     }
 
+    // [heretic] jump key
+    if (critical->jump && cmd->arti != 0xff
+        && (gamekeydown[key_jump] || mousebuttons[mousebjump]
+            || joybuttons[joybjump]))
+    {
+        cmd->arti |= AFLAG_JUMP;
+    }
+
 //
 // buttons
 //
