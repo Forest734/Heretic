@@ -926,6 +926,9 @@ void D_BindVariables(void)
 #ifdef CRISPY_TRUECOLOR
     M_BindIntVariable("crispy_truecolor",       &crispy->truecolor);
 #endif
+    // [heretic] Interpolate frames by default: at 35 fps the picture
+    // judders on a 60 Hz screen.
+    crispy->uncapped = 1;
     M_BindIntVariable("crispy_uncapped",        &crispy->uncapped);
     M_BindIntVariable("crispy_vsync",           &crispy->vsync);
     M_BindIntVariable("crispy_widescreen",      &crispy->widescreen);

@@ -20,5 +20,7 @@ itself are in NEWS.md.
 
 - True-colour rendering is built in by default, so light fades smoothly with distance
   instead of in bands.
+- Uncapped framerate is on by default, so the picture moves smoothly on a 60 Hz or faster
+  screen instead of at 35 frames a second.
 - With permanent mouselook on, landing from a fall or a jump no longer pulls the view back to
   the centre.

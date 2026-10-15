@@ -117,6 +117,7 @@ void BindCompatibilityVariables(void)
         M_BindIntVariable("crispy_soundmono",       &crispy->soundmono);
         M_BindIntVariable("crispy_lvlwpnsnd",       &crispy->lvlwpnsnd);
         M_BindIntVariable("crispy_translucency",    &crispy->translucency);
+        crispy->uncapped = 1; // [heretic] as in src/heretic/d_main.c
         M_BindIntVariable("crispy_uncapped",        &crispy->uncapped);
         M_BindIntVariable("crispy_vsync",           &crispy->vsync);
         M_BindIntVariable("crispy_widescreen",      &crispy->widescreen);
