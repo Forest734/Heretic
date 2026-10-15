@@ -11,13 +11,13 @@ COLORMAP # Da Werecat
 TINTTAB  # Da Werecat 
 LOADING  # * PLACE HOLDER *
 TITLE    # Jute Gyte
-HELP1    README	# * PLACE HOLDER *  
-HELP2    README	# * PLACE HOLDER *
-CREDIT   README	# * PLACE HOLDER * 
-E2END    README	# * PLACE HOLDER *
-E2PAL    		# * PLACE HOLDER *
-FINAL1   README	# * PLACE HOLDER *
-FINAL2   README	# * PLACE HOLDER *
+HELP1    HELPBAR	# heretic: made by screens/make_screens.py
+HELP2    HELPKEYS	# heretic: made by screens/make_screens.py
+CREDIT   CREDITS	# heretic: made by screens/make_screens.py
+E2END    E2VISTA	# heretic: made by screens/make_screens.py
+E2PAL    		# heretic: PLAYPAL, from screens/make_screens.py
+FINAL1   E3WINDOW	# heretic: made by screens/make_screens.py
+FINAL2   E3STARS	# heretic: made by screens/make_screens.py
 ENDTEXT  # Stilgar
 DEMO1    # * PLACE HOLDER *
 DEMO2    # * PLACE HOLDER *

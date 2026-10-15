@@ -11,8 +11,8 @@ heretic is a free Heretic, improved in graphics and gameplay. It has two parts:
 - **The game data** is Blasphemer 0.1.8+ (`5d858ad`, March 2023) in `blasphemer/`: free
   levels, graphics, sound and music made to replace Heretic's, so nothing needs buying. It's
   BSD-3-Clause (`blasphemer/COPYING.md`); `blasphemer/CREDITS.md` names its authors. Episodes
-  1-3 are mostly complete, and art is still missing or rough in places: `wadinfo.txt` marks
-  HELP1/2, CREDIT, the endings (E2END, FINAL1/2), LOADING and the three demos as placeholders.
+  1-3 are mostly complete, and art is still missing or rough in places: `wadinfo.txt` still
+  marks LOADING (unused by the engine) and the three demos as placeholders.
 
 What the fork changes so far is in CHANGELOG.md. Every change to upstream code is marked
 `// [heretic]`, as Crispy marks its own `// [crispy]`, so `git grep '\[heretic\]'` finds them.
@@ -90,6 +90,11 @@ SDL_VIDEODRIVER=offscreen SDL_AUDIODRIVER=dummy SDL_RENDER_DRIVER=software gdb -
 (`levels/`, `graphics/`, `sprites/`, `flats/`, `patches/`, `textures/`, `sounds/`,
 `musics/`, `lumps/`). The built `blasphem.wad` (single player) and `blasphdm.wad`
 (deathmatch) are ignored. Never commit Raven's `heretic.wad` or `heretic1.wad`.
+
+The help pages, credits and endings (HELP1/2, CREDIT, E2END, E2PAL, FINAL1/2) are ours, made
+by `blasphemer/screens/` from Blasphemer's own fonts, icons and level views; its README says
+how to make them again (after changing default keys, say). Both `wadinfo.txt` and
+`BlasphDM.txt` list them.
 
 Blasphemer marks itself with an empty `BLASPHEM` lump and has the `EXTENDED` lump, so it runs
 as the five-episode retail game. `src/d_iwad.c` knows `blasphem.wad` by name, ranked between

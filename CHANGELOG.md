@@ -18,6 +18,17 @@ itself are in NEWS.md.
 - Rendering at 4x (1280 x 800, wider in widescreen), now the default: Options → Crispness →
   page 1 → High resolution rendering (off, 2x, 4x). Edges and distant walls are much sharper
   on a 1080p or larger screen.
+- Real help, credits and ending screens in place of Blasphemer's placeholder, which showed
+  the same "Blasphemer is Free and Open-Source Software" page for all of them: F1 explains
+  the status bar and the artifacts, then the controls; the credits name everyone in
+  Blasphemer's CREDITS.md; episode 2 ends on a view of E2M3's river valley, and episode 3 on
+  E3M3's pentagram window before scrolling up into the stars. They're built from
+  Blasphemer's own graphics and levels by `blasphemer/screens/`.
+
+### Fixed
+
+- The end of episode 2 was drawn in the wrong colours: its palette (E2PAL) was a placeholder
+  too. It's now the game's own.
 
 ### Changed
 

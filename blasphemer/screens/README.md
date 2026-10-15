@@ -1,0 +1,30 @@
+# Screens
+
+The help pages, credits and episode endings, made from Blasphemer's own
+graphics: its fonts, artifact icons, status bar and flats, and views rendered
+from its levels by the engine. They replace placeholders that all showed one
+page (`lumps/readme.png`).
+
+| Lump   | File                | Shows                                          |
+| ------ | ------------------- | ---------------------------------------------- |
+| HELP1  | `lumps/helpbar.png`  | the status bar and the artifacts (F1)          |
+| HELP2  | `lumps/helpkeys.png` | the default controls (F1, next page)           |
+| CREDIT | `lumps/credits.png`  | everyone in `CREDITS.md`, and the engine       |
+| E2END  | `lumps/e2vista.png`  | after episode 2: E2M3's river valley           |
+| FINAL1 | `lumps/e3window.png` | after episode 3: E3M3's pentagram window ...   |
+| FINAL2 | `lumps/e3stars.png`  | ... then the scroll up into the stars, the end |
+| E2PAL  | `lumps/e2pal.lmp`    | E2END's palette: the game's own                |
+
+To make them again, say after changing the default keys, from the top of the
+repo with `blasphem.wad` built and the engine built:
+
+```sh
+python3 blasphemer/screens/render.py build/src/crispy-heretic blasphemer/blasphem.wad blasphemer/screens/shots
+python3 blasphemer/screens/make_screens.py blasphemer/blasphem.wad blasphemer/screens/shots blasphemer/lumps
+make -C blasphemer blasphem.wad
+```
+
+`render.py` runs the game off-screen under gdb and needs gdb and Pillow; it
+writes the views to `shots/`, which are kept, so changing the text only needs
+`make_screens.py`. Camera spots are in `render.py`, the text in
+`make_screens.py`. Everything stays in the WAD's palette.
