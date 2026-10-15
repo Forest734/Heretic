@@ -890,6 +890,25 @@ const char *QuitEndMsg[] = {
     "DO YOU WANT TO DELETE THE GAME NAMED",
 };
 
+// [heretic] darken the whole screen to about a third
+static void DimScreen(void)
+{
+    pixel_t *dest = I_VideoBuffer;
+    int i;
+#ifndef CRISPY_TRUECOLOR
+    const byte *shades = colormaps + 20 * 256;
+#endif
+
+    for (i = 0; i < SCREENWIDTH * SCREENHEIGHT; i++)
+    {
+#ifndef CRISPY_TRUECOLOR
+        dest[i] = shades[dest[i]];
+#else
+        dest[i] = I_BlendDark(dest[i], 0x58);
+#endif
+    }
+}
+
 void MN_Drawer(void)
 {
     int i;
@@ -903,6 +922,11 @@ void MN_Drawer(void)
     {
         if (askforquit)
         {
+            // [heretic] as behind the menu
+            if (gamestate == GS_DEMOSCREEN)
+            {
+                DimScreen();
+            }
             message = DEH_String(QuitEndMsg[typeofask - 1]);
 
             MN_DrTextA(message, 160 - MN_TextAWidth(message) / 2, 80);
@@ -938,6 +962,12 @@ void MN_Drawer(void)
         {
             MN_DrawInfo();
             return;
+        }
+        // [heretic] Blasphemer's title page has its name in big red letters
+        // right where the menu goes; darken the pages behind the menu.
+        if (gamestate == GS_DEMOSCREEN)
+        {
+            DimScreen();
         }
         if (screenblocks < 10)
         {

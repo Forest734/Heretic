@@ -50,3 +50,5 @@ itself are in NEWS.md.
   original game.
 - With permanent mouselook on, landing from a fall or a jump no longer pulls the view back to
   the centre.
+- The title and credit pages are darkened behind the menu and the quit question, so they
+  can be read over Blasphemer's title, which has its name in red right where the menu goes.
