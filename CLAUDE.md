@@ -30,7 +30,10 @@ make -C blasphemer install prefix=$HOME/.local     # to ~/.local/share/games/doo
 ```
 
 The Makefile doesn't know what the WADs are made from, so after changing anything in
-`blasphemer/`, delete `blasphem.wad` and `blasphdm.wad` before making them again.
+`blasphemer/`, delete `blasphem.wad` and `blasphdm.wad` before making them again. deutex
+only warns about a file it can't find (`w PC90 could not find file ...`) and fills the lump
+with junk, so check its output for `^w PC90`; the other `w` lines (TEXTURE2, wide and tall
+textures) are Blasphemer's own and harmless.
 
 `CRISPY_TRUECOLOR` is on by default here (upstream: off). The autotools build
 (`configure.ac`) wasn't changed and still defaults to 8-bit, so use CMake.
