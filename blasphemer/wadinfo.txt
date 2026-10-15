@@ -245,11 +245,11 @@ WPNUP    # Artisticdude
 
 [graphics]
 ADVISOR  -257 -10 # Stilgar
-IN_X     GOD1	0 0 # * PLACE HOLDER *  
-IN_YAH   GOD1	0 0 # * PLACE HOLDER * 
-MAPE1    0 0 # * PLACE HOLDER *
-MAPE2    0 0 # * PLACE HOLDER *   
-MAPE3    0 0 # * PLACE HOLDER *   
+IN_X     4 4	# heretic: made by screens/make_maps.py
+IN_YAH   4 21	# heretic: made by screens/make_maps.py
+MAPE1    0 0	# heretic: made by screens/make_maps.py
+MAPE2    0 0	# heretic: made by screens/make_maps.py
+MAPE3    0 0	# heretic: made by screens/make_maps.py
 FACEA0   0 0 # Reinaldo "Horror Movie Guy"
 FACEA1   0 0 # Reinaldo "Horror Movie Guy"
 FACEA2   0 0 # Reinaldo "Horror Movie Guy"

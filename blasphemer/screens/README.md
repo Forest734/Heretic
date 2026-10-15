@@ -48,3 +48,27 @@ rm blasphemer/blasphem.wad blasphemer/blasphdm.wad; make -C blasphemer blasphem.
 
 It reads only the WAD, not the engine. The offsets are in `wadinfo.txt` and
 `BlasphDM.txt`, and the script's comments say why they are what they are.
+
+## Intermission maps
+
+`make_maps.py` makes the maps shown between the levels of episodes 1 to 3,
+and the marks the engine puts on them, into `graphics/`:
+
+| Lump     | Shows                                                          |
+| -------- | -------------------------------------------------------------- |
+| MAPE1    | episode 1: an island, with forests, hills and rivers           |
+| MAPE2    | episode 2: scorched land in a sea of lava, with volcanoes      |
+| MAPE3    | episode 3: a coast on a grey sea                               |
+| IN_X     | a red cross on each level that's done                          |
+| IN_YAH   | a gold arrow over the next level, blinking                     |
+
+Each level's place stands where `src/heretic/in_lude.c` (`YAHspot`) puts its
+marks, and roads join each place to its nearest neighbours; the land around
+them is made up from seeded noise, so it comes out the same every time. The
+seeds, colours and what stands at each place are at the top of the script.
+
+```sh
+python3 blasphemer/screens/make_maps.py blasphemer/blasphem.wad blasphemer/graphics
+```
+
+It needs numpy and Pillow.
