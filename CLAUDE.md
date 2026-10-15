@@ -28,6 +28,9 @@ make -C blasphemer install prefix=$HOME/.local     # to ~/.local/share/games/doo
 ./build/src/crispy-heretic -iwad blasphemer/blasphem.wad -warp 1 1 -skill 3   # straight into E1M1
 ```
 
+The Makefile doesn't know what the WADs are made from, so after changing anything in
+`blasphemer/`, delete `blasphem.wad` and `blasphdm.wad` before making them again.
+
 `CRISPY_TRUECOLOR` is on by default here (upstream: off). The autotools build
 (`configure.ac`) wasn't changed and still defaults to 8-bit, so use CMake.
 

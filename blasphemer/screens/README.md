@@ -3,7 +3,7 @@
 The help pages, credits and episode endings, made from Blasphemer's own
 graphics: its fonts, artifact icons, status bar and flats, and views rendered
 from its levels by the engine. They replace placeholders that all showed one
-page (`lumps/readme.png`).
+page (`lumps/readme.png`). The menu's graphics are made here too (below).
 
 | Lump   | File                | Shows                                          |
 | ------ | ------------------- | ---------------------------------------------- |
@@ -28,3 +28,23 @@ make -C blasphemer blasphem.wad
 writes the views to `shots/`, which are kept, so changing the text only needs
 `make_screens.py`. Camera spots are in `render.py`, the text in
 `make_screens.py`. Everything stays in the WAD's palette.
+
+## Menu graphics
+
+`make_menu.py` makes the menu graphics Blasphemer had left as placeholders,
+into `graphics/`:
+
+| Lump              | Shows                                                    |
+| ----------------- | -------------------------------------------------------- |
+| M_SKL00-17        | the skull medallion (PSKULL) spinning beside the title   |
+| M_FSLOT           | a save slot: the status bar's stone in a silver frame    |
+| M_SLDLT, M_SLDRT  | the slider's ends, silver with a red jewel               |
+| M_SLDMD1, M_SLDMD2| the slider's rail, in turn; the first has a tick below   |
+
+```sh
+python3 blasphemer/screens/make_menu.py blasphemer/blasphem.wad blasphemer/graphics
+rm blasphemer/blasphem.wad blasphemer/blasphdm.wad; make -C blasphemer blasphem.wad
+```
+
+It reads only the WAD, not the engine. The offsets are in `wadinfo.txt` and
+`BlasphDM.txt`, and the script's comments say why they are what they are.

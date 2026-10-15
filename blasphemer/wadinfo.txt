@@ -361,30 +361,30 @@ GOD2     0 0 # * (Blank) *
 M_HTIC   0 0 # Jute Gyte
 M_SLCTR1 10 -1 # Stilgar 
 M_SLCTR2 10 -1 # Stilgar
-M_SKL00 GOD1 0 0 # * PLACE HOLDER *
-M_SKL01 GOD1 0 0 # * PLACE HOLDER *   
-M_SKL02 GOD1 0 0 # * PLACE HOLDER *   
-M_SKL03 GOD1 0 0 # * PLACE HOLDER *   
-M_SKL04 GOD1 0 0 # * PLACE HOLDER *   
-M_SKL05 GOD1 0 0 # * PLACE HOLDER *   
-M_SKL06 GOD1 0 0 # * PLACE HOLDER *   
-M_SKL07 GOD1 0 0 # * PLACE HOLDER *   
-M_SKL08 GOD1 0 0 # * PLACE HOLDER *   
-M_SKL09 GOD1 0 0 # * PLACE HOLDER *   
-M_SKL10 GOD1 0 0 # * PLACE HOLDER *   
-M_SKL11 GOD1 0 0 # * PLACE HOLDER *   
-M_SKL12 GOD1 0 0 # * PLACE HOLDER *   
-M_SKL13 GOD1 0 0 # * PLACE HOLDER *   
-M_SKL14 GOD1 0 0 # * PLACE HOLDER *   
-M_SKL15 GOD1 0 0 # * PLACE HOLDER *   
-M_SKL16 GOD1 0 0 # * PLACE HOLDER *   
-M_SKL17 GOD1 0 0 # * PLACE HOLDER * 
-M_SLDLT GOD1 0 0 # * PLACE HOLDER *
-M_SLDMD1 GOD1 0 0 # * PLACE HOLDER *   
-M_SLDMD2 GOD1 0 0 # * PLACE HOLDER *     
-M_SLDRT GOD1 0 0 # * PLACE HOLDER *
+M_SKL00 -2 6	# heretic: made by screens/make_menu.py
+M_SKL01 -2 6	# heretic: made by screens/make_menu.py
+M_SKL02 -2 6	# heretic: made by screens/make_menu.py
+M_SKL03 -2 6	# heretic: made by screens/make_menu.py
+M_SKL04 -2 6	# heretic: made by screens/make_menu.py
+M_SKL05 -2 6	# heretic: made by screens/make_menu.py
+M_SKL06 -2 6	# heretic: made by screens/make_menu.py
+M_SKL07 -2 6	# heretic: made by screens/make_menu.py
+M_SKL08 -2 6	# heretic: made by screens/make_menu.py
+M_SKL09 -2 6	# heretic: made by screens/make_menu.py
+M_SKL10 -2 6	# heretic: made by screens/make_menu.py
+M_SKL11 -2 6	# heretic: made by screens/make_menu.py
+M_SKL12 -2 6	# heretic: made by screens/make_menu.py
+M_SKL13 -2 6	# heretic: made by screens/make_menu.py
+M_SKL14 -2 6	# heretic: made by screens/make_menu.py
+M_SKL15 -2 6	# heretic: made by screens/make_menu.py
+M_SKL16 -2 6	# heretic: made by screens/make_menu.py
+M_SKL17 -2 6	# heretic: made by screens/make_menu.py
+M_SLDLT -20 0	# heretic: made by screens/make_menu.py
+M_SLDMD1 0 0	# heretic: made by screens/make_menu.py
+M_SLDMD2 0 0	# heretic: made by screens/make_menu.py
+M_SLDRT 0 0	# heretic: made by screens/make_menu.py
 M_SLDKB  4 4 # * PLACE HOLDER * 
-M_FSLOT  GOD1 0 0 # * PLACE HOLDER *  
+M_FSLOT  0 0	# heretic: made by screens/make_menu.py
 PAUSED   21 0 # * PLACE HOLDER *
 FONTA_S  0 0 # * Marker *
 FONTA01  0 0 # Mechadon

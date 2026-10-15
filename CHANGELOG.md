@@ -30,6 +30,10 @@ itself are in NEWS.md.
   mouth as it attacks. Crispy's brightmaps were drawn for Heretic's textures and lit the wrong parts of
   Blasphemer's, or nothing. Options → Crispness → page 1 → Apply brightmaps to (none, walls,
   items, both).
+- Menu graphics where Blasphemer had placeholders: a skull medallion spins on each side of
+  the title, the save and load slots can be seen (before, the menu showed nothing where
+  they were), and the volume, screen size and mouse sliders have a rail to move along
+  instead of a lone gem. They're built from Blasphemer's own art by `blasphemer/screens/`.
 
 ### Fixed
 
