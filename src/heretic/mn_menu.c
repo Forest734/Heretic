@@ -508,6 +508,22 @@ static const multiitem_t multiitem_freelook_hh[NUM_FREELOOKS_HH] =
     {FREELOOK_HH_SPRING, "SPRING"},
 };
 
+// [heretic] crispy->hires is a shift: 320 x 200 << hires
+enum
+{
+    HIRES_OFF,
+    HIRES_2X,
+    HIRES_4X,
+    NUM_HIRES
+};
+
+static const multiitem_t multiitem_hires[NUM_HIRES] =
+{
+    {HIRES_OFF, "OFF"},
+    {HIRES_2X, "2X"},
+    {HIRES_4X, "4X"},
+};
+
 // [heretic]
 static const multiitem_t multiitem_jump[NUM_JUMPS] =
 {
@@ -1659,9 +1675,10 @@ static void ChangeSettingEnum(int *setting, int option, int num_values)
     *setting %= num_values;
 }
 
+static int hookoption;
 static void CrispyHiresHook(void)
 {
-    crispy->hires = !crispy->hires;
+    ChangeSettingEnum(&crispy->hires, hookoption, NUM_HIRES); // [heretic] 4x
     // [crispy] re-initialize framebuffers, textures and renderer
     I_ReInitGraphics(REINIT_FRAMEBUFFERS | REINIT_TEXTURES | REINIT_ASPECTRATIO);
     // [crispy] re-calculate framebuffer coordinates
@@ -1679,12 +1696,12 @@ static void CrispyHiresHook(void)
 
 static boolean CrispyHires(int option)
 {
+    hookoption = option;
     crispy->post_rendering_hook = CrispyHiresHook;
 
     return true;
 }
 
-static int hookoption;
 static void CrispyToggleWidescreenHook (void)
 {
     ChangeSettingEnum(&crispy->widescreen, hookoption, NUM_RATIOS);
@@ -3120,7 +3137,7 @@ static void DrawCrispness1(void)
     DrawCrispnessSubheader("RENDERING", 25);
 
     // Hires rendering
-    DrawCrispnessItem(crispy->hires, 254, 35);
+    DrawCrispnessMultiItem(crispy->hires, 254, 35, multiitem_hires, false); // [heretic]
 
     // Widescreen
     DrawCrispnessMultiItem(crispy->widescreen, 164, 45, multiitem_widescreen, false);

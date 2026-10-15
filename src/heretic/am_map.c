@@ -381,10 +381,10 @@ static void AM_changeWindowLocTick(void)
         next_mapxstart -= MAPBGROUNDWIDTH << crispy->hires;
     if(next_mapxstart < 0)
         next_mapxstart += MAPBGROUNDWIDTH << crispy->hires;
-    if(next_mapystart >= MAPBGROUNDHEIGHT >> crispy->hires)
-        next_mapystart -= MAPBGROUNDHEIGHT >> crispy->hires;
+    if(next_mapystart >= MAPBGROUNDHEIGHT << crispy->hires) // [heretic] scaled tile
+        next_mapystart -= MAPBGROUNDHEIGHT << crispy->hires;
     if(next_mapystart < 0)
-        next_mapystart += MAPBGROUNDHEIGHT >> crispy->hires;
+        next_mapystart += MAPBGROUNDHEIGHT << crispy->hires;
 }
 
 void AM_changeWindowLoc(void)
@@ -453,10 +453,10 @@ void AM_changeWindowLoc(void)
         mapxstart -= MAPBGROUNDWIDTH << crispy->hires;
     if(mapxstart < 0)
         mapxstart += MAPBGROUNDWIDTH << crispy->hires;
-    if(mapystart >= MAPBGROUNDHEIGHT >> crispy->hires)
-        mapystart -= MAPBGROUNDHEIGHT >> crispy->hires;
+    if(mapystart >= MAPBGROUNDHEIGHT << crispy->hires) // [heretic] scaled tile
+        mapystart -= MAPBGROUNDHEIGHT << crispy->hires;
     if(mapystart < 0)
-        mapystart += MAPBGROUNDHEIGHT >> crispy->hires;
+        mapystart += MAPBGROUNDHEIGHT << crispy->hires;
     // - end of code that was commented-out
 
     m_x2 = m_x + m_w;
@@ -1171,10 +1171,11 @@ void AM_Ticker(void)
 
 void AM_clearFB(int color)
 {
-    int i, j;
+    int i, x;
     int dmapx;
     int dmapy;
-    int x1, x2, x3;
+    const int tilew = MAPBGROUNDWIDTH << crispy->hires; // [heretic]
+    const int tileh = MAPBGROUNDHEIGHT << crispy->hires;
 
     if (followplayer && !paused)
     {
@@ -1198,10 +1199,10 @@ void AM_clearFB(int color)
             mapxstart -= MAPBGROUNDWIDTH << crispy->hires;
         while (mapxstart < 0)
             mapxstart += MAPBGROUNDWIDTH << crispy->hires;
-        while (mapystart >= MAPBGROUNDHEIGHT >> crispy->hires)
-            mapystart -= MAPBGROUNDHEIGHT >> crispy->hires;
+        while (mapystart >= MAPBGROUNDHEIGHT << crispy->hires) // [heretic]
+            mapystart -= MAPBGROUNDHEIGHT << crispy->hires;
         while (mapystart < 0)
-            mapystart += MAPBGROUNDHEIGHT >> crispy->hires;
+            mapystart += MAPBGROUNDHEIGHT << crispy->hires;
 
         // [crispy] Follow mode interpolation does not need the special
         // treatment that non-follow mode gets.
@@ -1230,57 +1231,29 @@ void AM_clearFB(int color)
 
     //blit the automap background to the screen.
 
-    // [crispy] To support widescreen, increase the number of possible
-    // background tiles from 2 to 3. To support rendering at 2x resolution,
-    // treat original 320 x 158 tile image as 640 x 79.
-    j = mapystart * (MAPBGROUNDWIDTH << crispy->hires);
-
-    x1 = mapxstart;
-    x2 = finit_width - x1;
-
-    if (x2 > MAPBGROUNDWIDTH << crispy->hires)
-        x2 = MAPBGROUNDWIDTH << crispy->hires;
-
-    x3 = finit_width - x2 - x1;
-
+    // [heretic] Scale the 320 x 158 tile with the resolution, as the rest of
+    // the screen is, and wrap it as often as the width needs. (Crispy treated
+    // it as 640 x 79 at 2x, which can't stretch to 4x.)
     for (i = 0; i < finit_height; i++)
     {
-#ifndef CRISPY_TRUECOLOR
-        memcpy(I_VideoBuffer + i * finit_width,
-               maplump + j + (MAPBGROUNDWIDTH << crispy->hires) - x3, x3);
-
-        memcpy(I_VideoBuffer + i * finit_width + x3,
-               maplump + j + (MAPBGROUNDWIDTH << crispy->hires) - x2, x2);
-
-        memcpy(I_VideoBuffer + i * finit_width + x2 + x3,
-               maplump + j, x1);
-#else
-        int z;
+        const byte *src = maplump
+            + ((((mapystart + i) % tileh + tileh) % tileh) >> crispy->hires)
+            * MAPBGROUNDWIDTH;
         pixel_t *dest = I_VideoBuffer + i * finit_width;
-        byte *src = maplump + j + (MAPBGROUNDWIDTH << crispy->hires) - x3;
+        int sx = (mapxstart % tilew + tilew) % tilew;
 
-        for (z = 0; z < x3; z++)
+        for (x = 0; x < finit_width; x++)
         {
-            dest[z] = pal_color[src[z]];
-        }
-
-        dest += x3;
-        src += x3 - x2;
-        for (z = 0; z < x2; z++)
-        {
-            dest[z] = pal_color[src[z]];
-        }
-
-        dest += x2;
-        src = maplump + j;
-        for (z = 0; z < x1; z++)
-        {
-            dest[z] = pal_color[src[z]];
-        }
+#ifndef CRISPY_TRUECOLOR
+            dest[x] = src[sx >> crispy->hires];
+#else
+            dest[x] = pal_color[src[sx >> crispy->hires]];
 #endif
-        j += MAPBGROUNDWIDTH << crispy->hires;
-        if (j >= MAPBGROUNDHEIGHT * MAPBGROUNDWIDTH)
-            j = 0;
+            if (++sx == tilew)
+            {
+                sx = 0;
+            }
+        }
     }
 
 //       memcpy(I_VideoBuffer, maplump, finit_width*finit_height);

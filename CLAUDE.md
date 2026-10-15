@@ -107,7 +107,8 @@ saves in `savegames/blasphem.wad/`, apart from Heretic's. Settings go in
 - `src/` holds what the four games share: `i_*` the SDL platform layer (`i_video.c`),
   `v_video.c` drawing and screenshots, `m_config.c` settings, `m_controls.c` key bindings,
   `d_iwad.c` the IWAD search. A change here reaches Doom, Hexen and Strife as well, so build
-  all targets after one.
+  all targets after one. `crispy->hires` is a shift (320x200 << hires); Heretic goes to 2
+  (4x), and `max_hires` in `i_video.c` holds the other games to 1, as upstream.
 - `src/crispy.h` is the `crispy` struct of options, shared by all four games. A Heretic
   option needs binding in `src/heretic/d_main.c` (`D_BindVariables`) and, for the setup tool,
   in the Heretic block of `src/setup/compatibility.c`; the setup tool shows controls per game

@@ -30,20 +30,24 @@
 #define ORIGWIDTH  320 // [crispy]
 #define ORIGHEIGHT 200 // [crispy]
 
-#define MAXWIDTH  (ORIGWIDTH << 2) // [crispy]
-#define MAXHEIGHT (ORIGHEIGHT << 1) // [crispy]
+// [heretic] Heretic renders at up to 4x (crispy->hires 2); the other games at
+// up to 2x, which max_hires holds them to.
+#define MAXHIRES 2
+#define MAXWIDTH  (ORIGWIDTH << (MAXHIRES + 1)) // [crispy]
+#define MAXHEIGHT (ORIGHEIGHT << MAXHIRES) // [crispy]
 
 extern int SCREENWIDTH;
 extern int SCREENHEIGHT;
 extern int NONWIDEWIDTH; // [crispy] non-widescreen SCREENWIDTH
 extern int WIDESCREENDELTA; // [crispy] horizontal widescreen offset
+extern int max_hires; // [heretic] highest crispy->hires the game supports
 void I_GetScreenDimensions (void); // [crispy] re-calculate WIDESCREENDELTA
 void I_ToggleVsync (void); // [crispy] calls native SDL vsync toggle
 
 // Screen height used when aspect_ratio_correct=true.
 
 #define ORIGHEIGHT_4_3 240 // [crispy]
-#define MAXHEIGHT_4_3 (ORIGHEIGHT_4_3 << 1) // [crispy]
+#define MAXHEIGHT_4_3 (ORIGHEIGHT_4_3 << MAXHIRES) // [crispy]
 
 extern int SCREENHEIGHT_4_3;
 

@@ -108,6 +108,7 @@ void BindCompatibilityVariables(void)
         M_BindIntVariable("crispy_defaultskill",    &crispy->defaultskill);
         M_BindIntVariable("crispy_fpslimit",        &crispy->fpslimit);
         M_BindIntVariable("crispy_freelook",        &crispy->freelook_hh);
+        crispy->hires = 2; // [heretic] as in src/heretic/d_main.c
         M_BindIntVariable("crispy_hires",           &crispy->hires);
         M_BindIntVariable("crispy_brightmaps",      &crispy->brightmaps);
         M_BindIntVariable("crispy_jump",            &crispy->jump); // [heretic]

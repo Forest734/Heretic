@@ -929,6 +929,9 @@ void D_BindVariables(void)
     // [heretic] Interpolate frames by default: at 35 fps the picture
     // judders on a 60 Hz screen.
     crispy->uncapped = 1;
+    // [heretic] Render at up to 4x, and at 4x by default.
+    max_hires = MAXHIRES;
+    crispy->hires = MAXHIRES;
     M_BindIntVariable("crispy_uncapped",        &crispy->uncapped);
     M_BindIntVariable("crispy_vsync",           &crispy->vsync);
     M_BindIntVariable("crispy_widescreen",      &crispy->widescreen);

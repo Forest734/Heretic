@@ -53,6 +53,7 @@
 int SCREENWIDTH, SCREENHEIGHT, SCREENHEIGHT_4_3;
 int NONWIDEWIDTH; // [crispy] non-widescreen SCREENWIDTH
 int WIDESCREENDELTA; // [crispy] horizontal widescreen offset
+int max_hires = 1; // [heretic] Heretic raises it to MAXHIRES
 
 // These are (1) the window (or the full screen) that our game is rendered to
 // and (2) the renderer that scales the texture (see below) into this window.
@@ -1725,6 +1726,9 @@ void I_GetScreenDimensions (void)
 	int w = 16, h = 10;
 	int ah;
 
+	// [heretic] a hand-edited config can't ask for more than the game supports
+	crispy->hires = BETWEEN(0, max_hires, crispy->hires);
+
 	SCREENWIDTH = ORIGWIDTH << crispy->hires;
 	SCREENHEIGHT = ORIGHEIGHT << crispy->hires;
 
@@ -1767,7 +1771,8 @@ void I_GetScreenDimensions (void)
 		// [crispy] make sure SCREENWIDTH is an integer multiple of 4 ...
 		SCREENWIDTH = (SCREENWIDTH + (crispy->hires ? 0 : 3)) & (int)~3;
 		// [crispy] ... but never exceeds MAXWIDTH (array size!)
-		SCREENWIDTH = MIN(SCREENWIDTH, MAXWIDTH);
+		// [heretic] At 2x and below, keep the limit from before 4x.
+		SCREENWIDTH = MIN(SCREENWIDTH, ORIGWIDTH << MAX(2, crispy->hires + 1));
 	}
 
 	WIDESCREENDELTA = ((SCREENWIDTH - NONWIDEWIDTH) >> crispy->hires) / 2;

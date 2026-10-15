@@ -317,7 +317,7 @@ void SB_Init(void)
         crosshairpatch[i].toffset = SHORT(patch->topoffset);
     }
 
-    st_backing_screen = (pixel_t *) Z_Malloc(MAXWIDTH * (42 << 1) * sizeof(*st_backing_screen), PU_STATIC, 0);
+    st_backing_screen = (pixel_t *) Z_Malloc(MAXWIDTH * (42 << MAXHIRES) * sizeof(*st_backing_screen), PU_STATIC, 0); // [heretic] 4x
 }
 
 //---------------------------------------------------------------------------
@@ -491,6 +491,7 @@ static void DrSmallNumber(int val, int x, int y)
 static void ShadeLine(int x, int y, int height, int shade)
 {
     pixel_t *dest;
+    int i;
 #ifndef CRISPY_TRUECOLOR
     byte *shades;
 #endif
@@ -507,14 +508,15 @@ static void ShadeLine(int x, int y, int height, int shade)
     dest = I_VideoBuffer + y * SCREENWIDTH + x + (WIDESCREENDELTA << crispy->hires);
     while (height--)
     {
-        if (crispy->hires)
+        // [heretic] every screen column of the original one, at any resolution
+        for (i = 0; i < (1 << crispy->hires); i++)
+        {
 #ifndef CRISPY_TRUECOLOR
-            *(dest + 1) = *(shades + *dest);
-        *(dest) = *(shades + *dest);
+            dest[i] = shades[dest[i]];
 #else
-            *(dest + 1) = I_BlendDark(*dest, shade);
-        *(dest) = I_BlendDark(*dest, shade);
+            dest[i] = I_BlendDark(dest[i], shade);
 #endif
+        }
         dest += SCREENWIDTH;
     }
 }

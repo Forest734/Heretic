@@ -15,6 +15,9 @@ itself are in NEWS.md.
   Low jumps 36 units and high 45, as in Crispy Doom; a chicken hops lower. The jump key defaults
   to `/` and can be set in the setup tool (keyboard, mouse or controller). Jumping is off while
   recording or playing demos and in netgames, so demos stay compatible with Heretic.
+- Rendering at 4x (1280 x 800, wider in widescreen), now the default: Options → Crispness →
+  page 1 → High resolution rendering (off, 2x, 4x). Edges and distant walls are much sharper
+  on a 1080p or larger screen.
 
 ### Changed
 
@@ -22,5 +25,7 @@ itself are in NEWS.md.
   instead of in bands.
 - Uncapped framerate is on by default, so the picture moves smoothly on a 60 Hz or faster
   screen instead of at 35 frames a second.
+- The automap's background is drawn at the same scale at every resolution, as in the
+  original game.
 - With permanent mouselook on, landing from a fall or a jump no longer pulls the view back to
   the centre.
