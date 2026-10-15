@@ -24,6 +24,12 @@ itself are in NEWS.md.
   Blasphemer's CREDITS.md; episode 2 ends on a view of E2M3's river valley, and episode 3 on
   E3M3's pentagram window before scrolling up into the stars. They're built from
   Blasphemer's own graphics and levels by `blasphemer/screens/`.
+- Brightmaps made for Blasphemer's own art, and on by default: lava and lavafalls, runes,
+  stained glass, teleporter pentagrams, the gems and crosses on exit doors and some demons'
+  eyes glow in the dark, as do the Torch's flame, the Phoenix Rod's orbs and a Disciple's
+  mouth as it attacks. Crispy's brightmaps were drawn for Heretic's textures and lit the wrong parts of
+  Blasphemer's, or nothing. Options → Crispness → page 1 → Apply brightmaps to (none, walls,
+  items, both).
 
 ### Fixed
 
