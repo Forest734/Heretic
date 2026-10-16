@@ -103,6 +103,10 @@ by `blasphemer/screens/` from Blasphemer's own fonts, icons and level views; its
 how to make them again (after changing default keys, say). Both `wadinfo.txt` and
 `BlasphDM.txt` list them.
 
+Blasphemer's names for things, skills and levels are in `screens/names.py`, which writes
+them as the HEHACKED lump, an HHE patch the engine loads from the WAD. The help pages take
+their names from it too.
+
 Blasphemer marks itself with an empty `BLASPHEM` lump and has the `EXTENDED` lump, so it runs
 as the five-episode retail game. `src/d_iwad.c` knows `blasphem.wad` by name, ranked between
 `heretic.wad` and `heretic1.wad`; `src/heretic/d_main.c` titles it "Blasphemer" and keeps its

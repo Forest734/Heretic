@@ -27,6 +27,7 @@ DMXGUS   # * PLACE HOLDER *
 GFRAG    # * PLACE HOLDER *
 AUTOPAGE # GreyGhost
 LANGUAGE # Stilgar 
+HEHACKED	# heretic: made by screens/names.py
 EXTENDED # Stilgar
 BLASPHEM # Empty tag lump
 MUS_E1M1 BLAS01X  # Jute Gyte

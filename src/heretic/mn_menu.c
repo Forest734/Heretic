@@ -3227,6 +3227,8 @@ static void DrawCrispness2(void)
 
 static void DrawCrispness3(void)
 {
+    const char *skill; // [heretic]
+
     DrawCrispnessHeader("CRISPNESS 3/3");
 
     DrawCrispnessSubheader("TACTICAL", 25);
@@ -3245,7 +3247,24 @@ static void DrawCrispness3(void)
             crispy->bobfactor == BOBFACTOR_OFF);
 
     // Default difficulty
-    DrawCrispnessMultiItem(crispy->defaultskill, 200, 75, multiitem_difficulties, false);
+    // [heretic] by the skill menu's own name when a patch renames the skills,
+    // as Blasphemer's does: the short names here are Heretic's.  Words come
+    // off its front until it fits.
+    skill = SkillItems[(crispy->defaultskill + SKILL_HMP) % NUM_SKILLS].text;
+    if (DEH_HasStringReplacement(skill))
+    {
+        skill = DEH_String(skill);
+        while (200 + MN_TextAWidth(skill) > ORIGWIDTH - 10 && strchr(skill, ' '))
+        {
+            skill = strchr(skill, ' ') + 1;
+        }
+        dp_translation = crispy->defaultskill ? cr[CR_GREEN] : cr[CR_DARK];
+        MN_DrTextA(skill, 200, 75);
+    }
+    else
+    {
+        DrawCrispnessMultiItem(crispy->defaultskill, 200, 75, multiitem_difficulties, false);
+    }
 
     // [heretic] Jumping
     DrawCrispnessMultiItem(crispy->jump, 130, 85, multiitem_jump, false);

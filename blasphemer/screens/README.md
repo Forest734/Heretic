@@ -75,3 +75,24 @@ python3 blasphemer/screens/make_maps.py blasphemer/blasphem.wad blasphemer/graph
 ```
 
 It needs numpy and Pillow.
+
+## Names
+
+`names.py` gives the game Blasphemer's own names where Heretic's stood. It
+writes `lumps/hehacked.lmp`, the HEHACKED lump: an HHE patch that the engine
+loads from the WAD. The weapons, ammo, artifacts, armour, gold key and skill
+levels are named as in `lumps/language.lmp`, which only ZDoom-style ports
+read. The maps take their titles from `CHANGELOG.md` and the commits that
+added them. Maps Blasphemer hasn't named (most of episode 3) go by their
+numbers. `make_screens.py` takes the help pages' names from it too.
+
+```sh
+python3 blasphemer/screens/names.py src/heretic/deh_htext.c blasphemer/lumps
+rm blasphemer/blasphem.wad blasphemer/blasphdm.wad; make -C blasphemer blasphem.wad
+```
+
+HHE finds each string by its offset in `heretic.exe`, so the script looks
+them up in the engine's table. They're Heretic 1.0's offsets, which the
+engine uses unless `-hhever` says otherwise. Version 1.0 had no episodes 4
+and 5, so their maps keep Heretic's names. In Blasphemer those maps are
+deathmatch maps and placeholders.

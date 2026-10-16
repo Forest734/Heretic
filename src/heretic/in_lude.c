@@ -154,7 +154,8 @@ static const char *NameForMap(int map)
     name = DEH_String(name);
 
     // [crispy] check if map name starts with identifier before skipping it
-    if (strlen(name) >= 4 &&
+    // [heretic] and has a name after it; a map without one goes by "E3M1"
+    if (strlen(name) > 7 &&
         toupper(name[0]) == 'E' && isdigit(name[1]) &&
         toupper(name[2]) == 'M' && isdigit(name[3]))
     {

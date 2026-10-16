@@ -42,6 +42,12 @@ itself are in NEWS.md.
   Heretic, with a red cross on every level done and a gold arrow on the next. Blasphemer had
   only a blank screen there. They're drawn as ink on parchment, one land for each episode
   (an island; scorched land in a lava sea; a grey coast), by `blasphemer/screens/`.
+- Blasphemer's own names where Heretic's stood. Pickups say Necrocannon, Healing Elixir,
+  Plate Armor, Flame Tooth and so on, the skills run from Whimpering Craven to Death's Right
+  Hand, and the automap and the maps between levels name Blasphemer's levels (Death of the
+  Blasphemer, Grim Awakening, ...). Levels Blasphemer hasn't named, most of episode 3, go
+  by their numbers. The help pages use the same names. They're made by
+  `blasphemer/screens/names.py` into a HEHACKED lump in the WAD.
 
 ### Fixed
 

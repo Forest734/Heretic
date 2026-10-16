@@ -16,6 +16,7 @@ import os, sys
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 from wad import Wad
 from compose import Screen, W, H
+from names import NAMES
 from PIL import Image
 
 wad = Wad(sys.argv[1]); shots = sys.argv[2]; out = sys.argv[3]
@@ -50,12 +51,13 @@ rows = [[("ARTIPTN2", "QUARTZ FLASK"), ("ARTIINVU", "RING OF INVINCIBILITY"),
          ("ARTITRCH", "TORCH"), ("ARTIINVS", "SHADOWSPHERE"), ("ARTISOAR", "WINGS OF WRATH")],
         [("ARTIPWBK", "TOME OF POWER"), ("ARTIFBMB", "TIME BOMB OF THE ANCIENTS"),
          ("ARTIEGGC", "MORPH OVUM"), ("ARTISPHL", "MYSTIC URN"), ("ARTIATLP", "CHAOS DEVICE")]]
-split = {"RING OF INVINCIBILITY": ["RING OF", "INVINCIBILITY"],
-         "TIME BOMB OF THE ANCIENTS": ["TIME BOMB OF", "THE ANCIENTS"],
-         "SHADOWSPHERE": ["SHADOW-", "SPHERE"]}
+split = {"GRAIL OF LIFEBLOOD": ["GRAIL OF", "LIFEBLOOD"],
+         "SIGIL OF DEATH": ["SIGIL OF", "DEATH"],
+         "MIRRORGATE": ["MIRROR-", "GATE"]}
 for r, row in enumerate(rows):
     base = (127, 175)[r]     # icons stand on this line, names below it
     for c, (icon, name) in enumerate(row):
+        name = NAMES.get(name, name)      # Blasphemer's, as the game shows
         cx = (30, 100, 166, 226, 286)[c]  # the wide names get room
         w, h = s.patch_size(icon)
         s.patch(icon, cx - w // 2, base - h, offsets=False)
@@ -83,7 +85,7 @@ controls = [
     ("LOOK UP / DOWN", "PGDN  DEL     CENTRE  END"),
     ("FLY UP / DOWN", "PGUP  INS     LAND  HOME"),
     ("ARTIFACTS", "[  ]  CHOOSE     ENTER  USE"),
-    ("TOME OF POWER", "BACKSPACE"),
+    (NAMES["TOME OF POWER"], "BACKSPACE"),
     ("MAP", "TAB"),
     ("SAVE / LOAD", "F2  F3     QUICK  F6  F9"),
     ("MENU", "ESC     BRIGHTNESS  F11"),
