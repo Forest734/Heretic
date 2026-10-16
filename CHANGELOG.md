@@ -44,6 +44,9 @@ itself are in NEWS.md.
   that way, where Blasphemer showed an asterisk; the Crispness menu points with the same gem.
 - Using an artifact flashes a burst of fire in the artifact box, where Blasphemer flashed a
   stray red mark.
+- The Phoenix Rod's ammo, Flame Tooth and Flame Jaws, is fire set in silver and glows in the
+  dark, where Blasphemer had the Frostfang's ice ammo tinted green. Made by
+  `blasphemer/screens/`.
 - Maps between levels: after each level of episodes 1 to 3, the episode's map is shown, as in
   Heretic, with a red cross on every level done and a gold arrow on the next. Blasphemer had
   only a blank screen there. They're drawn as ink on parchment, one land for each episode

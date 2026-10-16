@@ -437,8 +437,8 @@ const byte *R_BrightmapForTexName (const char *texname)
 const byte *R_BrightmapForSprite (const int state)
 {
     // [heretic] Blasphemer's Torch is a copper lantern with a small flame,
-    // its Phoenix Rod orbs are (placeholder) green crystals, and its Disciple
-    // is a brain whose mouth glows as it attacks.
+    // its Phoenix Rod ammo is fire set in silver, and its Disciple is a brain
+    // whose mouth glows as it attacks.
     if (blasphemer && (crispy->brightmaps & BRIGHTMAPS_SPRITES))
     {
         switch (state)
@@ -455,6 +455,9 @@ const byte *R_BrightmapForSprite (const int state)
             case S_AMP2_1:
             case S_AMP2_2:
             case S_AMP2_3:
+            {
+                return bl_fire;
+            }
             case S_WIZARD_ATK1:
             case S_WIZARD_ATK2:
             case S_WIZARD_ATK3:

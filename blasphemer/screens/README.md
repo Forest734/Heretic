@@ -76,6 +76,25 @@ python3 blasphemer/screens/make_maps.py blasphemer/blasphem.wad blasphemer/graph
 
 It needs numpy and Pillow.
 
+## Sprites
+
+`make_sprites.py` makes the sprites Blasphemer left as placeholders, into
+`sprites/`:
+
+| Lump              | Shows                                                    |
+| ----------------- | -------------------------------------------------------- |
+| AMP1A0-C0         | Flame Tooth, the Phoenix Rod's ammo: the Frostfang's Ice Shard (AMB1) in fire colours |
+| AMP2A0-C0         | Flame Jaws, the same from the Ice Jewel (AMB2)           |
+
+Blasphemer's were the ice ammo tinted green. The fire stays within the
+colours of the brightmap that `src/heretic/r_bmaps.c` gives them
+(`bl_fire`), so it glows and the silver around it doesn't.
+
+```sh
+python3 blasphemer/screens/make_sprites.py blasphemer/blasphem.wad blasphemer/sprites
+rm blasphemer/blasphem.wad blasphemer/blasphdm.wad; make -C blasphemer blasphem.wad
+```
+
 ## Names
 
 `names.py` gives the game Blasphemer's own names where Heretic's stood. It

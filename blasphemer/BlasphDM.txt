@@ -984,12 +984,12 @@ AMB2C0 8 13  # * PLACE HOLDER *
 AMG2A0 7 13  # * PLACE HOLDER *
 AMG2B0 7 13 # * PLACE HOLDER *
 AMG2C0 7 13  # * PLACE HOLDER *
-AMP1A0 5 12  # * PLACE HOLDER *
-AMP1B0 5 12  # * PLACE HOLDER *
-AMP1C0 5 12  # * PLACE HOLDER *
-AMP2A0 7 13  # * PLACE HOLDER *
-AMP2B0 7 13  # * PLACE HOLDER *
-AMP2C0 7 13  # * PLACE HOLDER *
+AMP1A0 5 12	# heretic: made by screens/make_sprites.py
+AMP1B0 5 12	# heretic: made by screens/make_sprites.py
+AMP1C0 5 12	# heretic: made by screens/make_sprites.py
+AMP2A0 7 13	# heretic: made by screens/make_sprites.py
+AMP2B0 7 13	# heretic: made by screens/make_sprites.py
+AMP2C0 7 13	# heretic: made by screens/make_sprites.py
 ARTIATLP -1 -2 # Stilgar
 ARTIEGGC -3 -3 # * PLACE HOLDER *
 ARTIFBMB -1 -4 # * PLACE HOLDER *
