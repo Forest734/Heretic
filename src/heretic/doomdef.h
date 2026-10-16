@@ -502,6 +502,26 @@ typedef struct player_s
     int jumpTics;
 } player_t;
 
+// [heretic] The gear the player came into the level with, kept by
+// G_DoLoadLevel, which dying starts the level again with when Crispness's
+// "Restart after death" is "as entered".  Saved by p_extsaveg.c.
+typedef struct
+{
+    int episode, map;           // map is 0 when there is none
+    int health;
+    int armorpoints, armortype;
+    boolean backpack;
+    weapontype_t readyweapon;
+    int weapons;                // a bit for each weapon owned
+    int ammo[NUMAMMO];
+    int maxammo[NUMAMMO];
+    artitype_t readyArtifact;
+    int inventorySlotNum;
+    inventory_t inventory[NUMINVENTORYSLOTS];
+} entrygear_t;
+
+extern entrygear_t entrygear;
+
 #define CF_NOCLIP		1
 #define	CF_GODMODE		2
 #define	CF_NOMOMENTUM	4       // not really a cheat, just a debug aid

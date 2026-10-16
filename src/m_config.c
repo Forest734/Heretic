@@ -2411,6 +2411,15 @@ static default_t extra_defaults_list[] =
     CONFIG_VARIABLE_INT(crispy_defaultskill),
 
     //!
+    // @game heretic
+    //
+    // After dying, restart the level with only the wand (0) or with the
+    // gear the player came into it with (1).
+    //
+
+    CONFIG_VARIABLE_INT(crispy_deathrestart),
+
+    //!
     // @game doom
     //
     // Show a progress bar when playing back a demo.

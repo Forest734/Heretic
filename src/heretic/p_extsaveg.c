@@ -82,6 +82,91 @@ static void P_ReadMarkPoints (const char *key)
     }
 }
 
+// [heretic] entrygear: episode, map, health, armour, backpack, weapons,
+// ammo, then the artifacts
+
+static void P_WriteEntryGear (const char *key)
+{
+    const entrygear_t *g = &entrygear;
+    int i;
+
+    if (g->episode != gameepisode || g->map != gamemap)
+    {
+        return;
+    }
+
+    fprintf(SaveGameFP, "%s %d %d %d %d %d %d %d %d %d", key,
+            g->episode, g->map, g->health, g->armorpoints, g->armortype,
+            g->backpack, g->readyweapon, g->weapons, g->readyArtifact);
+    for (i = 0; i < NUMAMMO; i++)
+    {
+        fprintf(SaveGameFP, " %d %d", g->ammo[i], g->maxammo[i]);
+    }
+    fprintf(SaveGameFP, " %d", g->inventorySlotNum);
+    for (i = 0; i < g->inventorySlotNum; i++)
+    {
+        fprintf(SaveGameFP, " %d %d", g->inventory[i].type, g->inventory[i].count);
+    }
+    fputs("\n", SaveGameFP);
+}
+
+static void P_ReadEntryGear (const char *key)
+{
+    const int fixed = 9 + 2 * NUMAMMO + 1;
+    int v[9 + 2 * NUMAMMO + 1 + 2 * NUMINVENTORYSLOTS];
+    entrygear_t g;
+    char *p, *end;
+    int i, n;
+
+    p = strstr(line, key) + strlen(key);
+    for (n = 0; n < arrlen(v); n++)
+    {
+        v[n] = strtol(p, &end, 10);
+        if (end == p)
+        {
+            break;
+        }
+        p = end;
+    }
+
+    if (n < fixed || v[fixed - 1] < 0 || v[fixed - 1] > NUMINVENTORYSLOTS
+     || n != fixed + 2 * v[fixed - 1]
+     || v[0] != gameepisode || v[1] != gamemap || v[2] <= 0
+     || v[6] < 0 || v[6] >= NUMWEAPONS || !(v[7] & (1 << v[6]))
+     || v[8] < arti_none || v[8] >= NUMARTIFACTS)
+    {
+        return;
+    }
+
+    g.episode = v[0];
+    g.map = v[1];
+    g.health = v[2];
+    g.armorpoints = v[3];
+    g.armortype = v[4];
+    g.backpack = v[5] != 0;
+    g.readyweapon = v[6];
+    g.weapons = v[7];
+    g.readyArtifact = v[8];
+    for (i = 0; i < NUMAMMO; i++)
+    {
+        g.ammo[i] = v[9 + 2 * i];
+        g.maxammo[i] = v[10 + 2 * i];
+    }
+    g.inventorySlotNum = v[fixed - 1];
+    memset(g.inventory, 0, sizeof(g.inventory));
+    for (i = 0; i < g.inventorySlotNum; i++)
+    {
+        g.inventory[i].type = v[fixed + 2 * i];
+        g.inventory[i].count = v[fixed + 2 * i + 1];
+        if (g.inventory[i].type <= arti_none || g.inventory[i].type >= NUMARTIFACTS)
+        {
+            return;
+        }
+    }
+
+    entrygear = g;
+}
+
 typedef struct
 {
     const char *key;
@@ -95,6 +180,7 @@ static const extsavegdata_t extsavegdata[] =
     // [crispy] @FORKS: please change this if you are going to introduce incompatible changes!
     {"crispy-heretic", P_WritePackageTarname, NULL, 0},
     {"markpoints", P_WriteMarkPoints, P_ReadMarkPoints, 1},
+    {"entrygear", P_WriteEntryGear, P_ReadEntryGear, 1}, // [heretic]
 };
 
 void P_WriteExtendedSaveGameData (void)

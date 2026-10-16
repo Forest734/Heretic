@@ -52,6 +52,7 @@ typedef struct
 	int crosshairtarget;
 	int crosshairtype;
 	int crosshaircolor;
+	int deathrestart; // [heretic]
 	int defaultskill;
 	int demotimer;
 	int demotimerdir;

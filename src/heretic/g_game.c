@@ -113,6 +113,7 @@ boolean deathmatch;             // only if started as net death
 boolean netgame;                // only true if packets are broadcast
 boolean playeringame[MAXPLAYERS];
 player_t players[MAXPLAYERS];
+entrygear_t entrygear; // [heretic]
 
 int consoleplayer;              // player taking events and displaying
 int displayplayer;              // view being displayed
@@ -1046,6 +1047,66 @@ void G_BuildTiccmd(ticcmd_t *cmd, int maketic)
 }
 
 
+// [heretic] Keep the gear the player came into the level with ...
+
+static void G_KeepEntryGear(const player_t *p)
+{
+    int i;
+
+    entrygear.episode = gameepisode;
+    entrygear.map = gamemap;
+    entrygear.health = p->health;
+    entrygear.armorpoints = p->armorpoints;
+    entrygear.armortype = p->armortype;
+    entrygear.backpack = p->backpack;
+    entrygear.readyweapon = p->readyweapon;
+    entrygear.weapons = 0;
+    for (i = 0; i < NUMWEAPONS; i++)
+    {
+        if (p->weaponowned[i])
+        {
+            entrygear.weapons |= 1 << i;
+        }
+    }
+    memcpy(entrygear.ammo, p->ammo, sizeof(entrygear.ammo));
+    memcpy(entrygear.maxammo, p->maxammo, sizeof(entrygear.maxammo));
+    entrygear.readyArtifact = p->readyArtifact;
+    entrygear.inventorySlotNum = p->inventorySlotNum;
+    memcpy(entrygear.inventory, p->inventory, sizeof(entrygear.inventory));
+}
+
+// [heretic] ... and give it back to the player, just reborn.
+
+static void G_GiveEntryGear(player_t *p)
+{
+    int i;
+
+    p->health = entrygear.health;
+    p->armorpoints = entrygear.armorpoints;
+    p->armortype = entrygear.armortype;
+    p->backpack = entrygear.backpack;
+    p->readyweapon = p->pendingweapon = entrygear.readyweapon;
+    for (i = 0; i < NUMWEAPONS; i++)
+    {
+        p->weaponowned[i] = (entrygear.weapons >> i) & 1;
+    }
+    memcpy(p->ammo, entrygear.ammo, sizeof(p->ammo));
+    memcpy(p->maxammo, entrygear.maxammo, sizeof(p->maxammo));
+    p->readyArtifact = entrygear.readyArtifact;
+    p->inventorySlotNum = entrygear.inventorySlotNum;
+    memcpy(p->inventory, entrygear.inventory, sizeof(p->inventory));
+    p->artifactCount = 0;
+    for (i = 0; i < p->inventorySlotNum; i++)
+    {
+        p->artifactCount += p->inventory[i].count;
+        if (p->inventory[i].type == p->readyArtifact && p == &players[consoleplayer])
+        {
+            inv_ptr = i;        // the inventory bar's cursor on it
+            curpos = MIN(i, 6);
+        }
+    }
+}
+
 /*
 ==============
 =
@@ -1088,7 +1149,18 @@ void G_DoLoadLevel(void)
         }
     }
 
+    // [heretic] after dying, start the level again with the gear the player
+    // came into it with, rather than with only the wand
+    if (critical->deathrestart
+     && players[consoleplayer].playerstate == PST_REBORN
+     && entrygear.episode == gameepisode && entrygear.map == gamemap)
+    {
+        G_PlayerReborn(consoleplayer);
+        G_GiveEntryGear(&players[consoleplayer]);
+    }
+
     P_SetupLevel(gameepisode, gamemap, 0, gameskill);
+    G_KeepEntryGear(&players[consoleplayer]); // [heretic]
     displayplayer = consoleplayer;      // view the guy you are playing
     gameaction = ga_nothing;
     Z_CheckHeap();
@@ -2292,6 +2364,7 @@ void G_InitNew(skill_t skill, int episode, int map)
         players[i].playerstate = PST_REBORN;
         players[i].didsecret = false;
     }
+    entrygear.map = 0; // [heretic] a new game brings no gear in
     // Set up a bunch of globals
     usergame = true;            // will be set false if a demo
     paused = false;

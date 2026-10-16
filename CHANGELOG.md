@@ -15,6 +15,12 @@ itself are in NEWS.md.
   Low jumps 36 units and high 45, as in Crispy Doom; a chicken hops lower. The jump key defaults
   to `/` and can be set in the setup tool (keyboard, mouse or controller). Jumping is off while
   recording or playing demos and in netgames, so demos stay compatible with Heretic.
+- Starting a level again after dying with the gear you came into it with, as an option:
+  Options → Crispness → page 3 → Restart after death (wand only, as entered; wand only by
+  default). Heretic starts you again with only the staff and wand; "as entered" gives back
+  the health, armor, weapons, ammo and artifacts you had when the level began, as if loading
+  a save made then. Saved games keep it. It's off while recording or playing demos and in
+  netgames.
 - Rendering at 4x (1280 x 800, wider in widescreen), now the default: Options → Crispness →
   page 1 → High resolution rendering (off, 2x, 4x). Edges and distant walls are much sharper
   on a 1080p or larger screen.

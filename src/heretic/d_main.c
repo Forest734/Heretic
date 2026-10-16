@@ -920,6 +920,7 @@ void D_BindVariables(void)
     M_BindIntVariable("crispy_crosshair",       &crispy->crosshair);
     M_BindIntVariable("crispy_crosshairtype",   &crispy->crosshairtype);
     M_BindIntVariable("crispy_crosshaircolor",  &crispy->crosshaircolor);
+    M_BindIntVariable("crispy_deathrestart",    &crispy->deathrestart); // [heretic]
     M_BindIntVariable("crispy_defaultskill",    &crispy->defaultskill);
     M_BindIntVariable("crispy_fpslimit",        &crispy->fpslimit);
     M_BindIntVariable("crispy_freelook",        &crispy->freelook_hh);
